@@ -1,5 +1,12 @@
-var builder = WebApplication.CreateBuilder(args);
+using FolderStructure;
+using Microsoft.EntityFrameworkCore;
 
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<FolderContext>
+    (options =>
+    {
+        options.UseNpgsql(builder.Configuration.GetConnectionString("FolderDb"));
+    });
 // Add services to the container.
 builder.Services.AddRazorPages();
 
