@@ -1,10 +1,33 @@
-﻿@page
+﻿@page "{id:int?}"
 @model IndexModel
-@{
-    ViewData["Title"] = "Home page";
+
+<h1>Directory Structure</h1>
+
+@functions {
+    async Task RenderFolders(int parentId)
+    {
+        var folders = Model.Folders.Where(f => f.ParentId == parentId).ToList();
+
+        if (folders.Any())
+        {
+            <ul>
+                    @foreach (var childFolder in Model.ChildFolders)
+                    {
+                    <li>
+                        <a href="/Index?id=@childFolder.Id">@childFolder.Name</a>
+                    </li>
+                }
+            </ul>
+        }
+    }
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@if (Model.Folder != null)
+{
+    <h1>@Model.Folder.Name</h1>
+    await RenderFolders(Model.Folder.Id);
+}
+else
+{
+    <p> No folder found. </p>
+}
