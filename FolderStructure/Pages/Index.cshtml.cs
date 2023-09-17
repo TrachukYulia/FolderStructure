@@ -7,21 +7,12 @@ namespace FolderStructure.Pages
     public class IndexModel : PageModel
     {
         private readonly FolderContext _context;
-        private readonly IWebHostEnvironment _environment;
         public Folder Folder { get; set; }
         public List<Folder> Folders { get; set; }
         public List<Folder> ChildFolders { get; set; }
-        [BindProperty]
-        public IFormFile File { get; set; }
-        [BindProperty]
-        public IFormFile FormFile { get; set; }
-
-        public string Message { get; set; }
-        public IndexModel(FolderContext db, IWebHostEnvironment environment)
+        public IndexModel(FolderContext db)
         {
             _context = db;
-            _environment = environment;
-
         }
 
         public IActionResult OnGet(int? id)
