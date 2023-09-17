@@ -22,12 +22,12 @@
 
 @if (Model.Folder != null)
 {
-    <h1>"Folder" - @Model.Folder.Name</h1>
+    <h1>"Folder" - @Model.Folder.Name </h1>
     await RenderFolders(Model.Folder.Id);
 }
 else
 {
-    <p> No folder found. </p>
+    @Model.Message
 }
 
 
