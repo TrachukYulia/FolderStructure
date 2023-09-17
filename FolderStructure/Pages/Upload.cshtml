@@ -1,0 +1,18 @@
+﻿@page
+@model UploadModel
+@{
+    ViewData["Title"] = "Upload files";
+}
+<h1>@ViewData["Title"]</h1>
+
+
+<form method="post" enctype="multipart/form-data">
+    <input type="file" asp-for="UploadFile" accept=".txt" />
+    <input type="submit" />
+</form>
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-success mt-3">
+        @Model.Message
+    </div>
+}
